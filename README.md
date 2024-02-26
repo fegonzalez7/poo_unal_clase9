@@ -27,7 +27,7 @@ Si bien Python no tiene un mecanismo de encapsulamiento puro como Java o C++, se
 classDiagram
 class Animal {
   + name: string
-  + speak(): void
+  + speak():
 }
 ```
 
@@ -56,7 +56,7 @@ class Animal {
 class Dog {
   + bark()
 }
-Dog --|> Animal
+Dog <|-- Animal
 ```
 
 
@@ -87,10 +87,10 @@ classDiagram
 class Animal {
   __name: string
 
-  + Animal(name: string): void
-  + speak(): void
-  + get_name(): string
-  + set_name(new_name: string): void
+  + Animal(name: str)
+  + speak(): 
+  + get_name(): str
+  + set_name(new_name: str)
 }
 ```
 
