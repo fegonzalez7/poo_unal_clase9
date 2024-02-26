@@ -21,6 +21,8 @@ Si bien Python no tiene un mecanismo de encapsulamiento puro como Java o C++, se
 - **Private (__):** Se indica con un prefijo de dos guiones bajos. Python realiza un cambio de nombre (name mangling) para hacerlos inaccesibles desde fuera.
 
 **Ejemplos:**
+
+**Public**
 ```mermaid
 classDiagram
 class Animal {
@@ -43,9 +45,9 @@ animal.speak()
 print(f"Nombre del animal: {animal.name}")
 ```
 
-```mermaid
 
-```
+**Protected**
+```mermaid
 classDiagram
 class Animal {
   _name: string
@@ -61,6 +63,8 @@ class Dog extends Animal {
   + Dog(name: string): void
   + bark(): void
 }
+```
+
 
 ```python
 # Protected
@@ -82,6 +86,8 @@ dog.speak()
 # dog._name = "Fido"
 ```
 
+
+**Private**
 ```mermaid
 classDiagram
 class Animal {
@@ -210,6 +216,7 @@ Los setters y getters son métodos especiales que permiten controlar el acceso a
 **Ejemplos:**
 **Personas y edades**
 ```mermaid
+classDiagram
 class Persona {
     __nombre: string
     __edad: int
