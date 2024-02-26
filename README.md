@@ -56,7 +56,7 @@ class Animal {
 class Dog {
   + bark()
 }
-Dog <|-- Animal
+Animal <|-- Dog
 ```
 
 
