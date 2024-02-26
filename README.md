@@ -50,19 +50,13 @@ print(f"Nombre del animal: {animal.name}")
 ```mermaid
 classDiagram
 class Animal {
-  _name: string
-
-  + Animal(name: string): void
-  + speak(): void
-
-  + getName(): string (protected)
-  + setName(newName: string): void (protected)
+  _name: str
+  + speak() 
 }
-
-class Dog extends Animal {
-  + Dog(name: string): void
-  + bark(): void
+class Dog {
+  + bark()
 }
+Dog --|> Animal
 ```
 
 
