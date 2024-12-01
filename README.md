@@ -1,22 +1,29 @@
 # Programación Orientada a Objetos - UNAL
 
+## Tabla de Contenidos
+
+- [Encapsulamiento](#clase-9-encapsulamiento)
+  - [Definición](#definición)
+  - [Implementación](#implementación)
+  - [Setters and Getters](#setters-and-getters)
+  - [Encapsulamiento y herencia](#encapsulamiento-y-herencia)
+
+
 ## Clase 9: Encapsulamiento
 
 ### Definición
 El encapsulamiento es un pilar fundamental de la POO que se basa en *restringir los detalles internos de un objeto (atributos y métodos) a otros objetos*. Solo se expone una interfaz pública para interactuar con el objeto.
 
-Qué se logra con el encapsulamiento:
+Qué se logra con el encapsulamiento?:
 
-- **Protección de datos:** Evita la modificación accidental o malintencionada de los atributos internos del objeto.
-- **Mejora la modularidad:** Permite crear objetos independientes y reutilizables.
-- **Facilita el mantenimiento:** Simplifica la comprensión y el cambio del código al ocultar la complejidad interna.
-- **Aumenta la flexibilidad:** Permite modificar la implementación interna del objeto sin afectar a los usuarios externos.
-- **Mejora la seguridad:** Protege información sensible del objeto.
+- **Protección de datos:** Evitar la modificación accidental o malintencionada de los atributos internos del objeto.
+- **Facilita el mantenimiento:** Simplificar la comprensión y el cambio del código al ocultar la complejidad interna.
+- **Mejora la seguridad:** Proteger información sensible del objeto.
 
 ### Implementación 
 Si bien Python no tiene un mecanismo de encapsulamiento puro como Java o C++, se puede simular (se tiene la convención...pero es burlable).
 
-- **Public:** Por defecto, todos los miembros de una clase son públicos.
+- **Public:** Por defecto todos los miembros de una clase son públicos.
 - **Protected (_):** Se indica con un prefijo de un guion bajo. Son accesibles dentro de la clase y sus subclases.
 - **Private (__):** Se indica con un prefijo de dos guiones bajos. Python realiza un cambio de nombre (name mangling) para hacerlos inaccesibles desde fuera.
 
@@ -34,11 +41,11 @@ class Animal {
 ```python
 # Public
 class Animal:
-    def __init__(self, name):
-        self.name = name
+  def __init__(self, name):
+    self.name = name
 
-    def speak(self):
-        print(f"El animal {self.name} dice algo")
+  def speak(self):
+    print(f"El animal {self.name} dice algo")
 
 animal = Animal("Perro")
 animal.speak()
@@ -63,15 +70,15 @@ Animal <|-- Dog
 ```python
 # Protected
 class Animal:
-    def __init__(self, name):
-        self._name = name
+  def __init__(self, name):
+    self._name = name
 
-    def speak(self):
-        print(f"El animal {self._name} dice algo")
+  def speak(self):
+    print(f"El animal {self._name} dice algo")
 
 class Dog(Animal):
-    def bark(self):
-        print(f"El perro {self._name} ladra")
+  def bark(self):
+    print(f"El perro {self._name} ladra")
 
 dog = Dog("Toby")
 dog.speak()
@@ -97,18 +104,18 @@ class Animal {
 ```python
 # Private
 class Animal:
-    def __init__(self, name):
-        self.__name = name
+  def __init__(self, name):
+    self.__name = name
 
-    def speak(self):
-        print(f"El animal {self.__name} dice algo")
+  def speak(self):
+    print(f"El animal {self.__name} dice algo")
 
-    def get_name(self):
-        return self.__name
+  def get_name(self):
+    return self.__name
 
-    def set_name(self, new_name):
-        if new_name:
-            self.__name = new_name
+  def set_name(self, new_name):
+    if new_name:
+      self.__name = new_name
 
 
 animal = Animal("Gato")
@@ -143,49 +150,49 @@ class BankAccount {
 import uuid
 
 class BankAccount:
-    def __init__(self, balance):
-        self.__balance = balance
-        self.__password = ''
-        self.__code = uuid.uuid4()
+  def __init__(self, balance):
+    self.__balance = balance
+    self.__password = ''
+    self.__code = uuid.uuid4()
 
-    def deposit(self, amount):
-        if amount > 0:
-            self.__balance += amount
-            return True
-        else:
-            return False
+  def deposit(self, amount):
+    if amount > 0:
+      self.__balance += amount
+      return True
+    else:
+      return False
 
-    def withdraw(self, amount):
-        if amount > 0 and amount <= self.__balance:
-            self.__balance -= amount
-            return True
-        else:
-            print("El monto a retirar no puede ser mayor al saldo actual")
-            return False
+  def withdraw(self, amount):
+    if amount > 0 and amount <= self.__balance:
+      self.__balance -= amount
+      return True
+    else:
+      print("El monto a retirar no puede ser mayor al saldo actual")
+      return False
 
-    def get_balance(self):
-        return self.__balance
+  def get_balance(self):
+    return self.__balance
 
-    def get_code(self):
-        self.__code = uuid.uuid4()
-        return self.__code 
+  def get_code(self):
+    self.__code = uuid.uuid4()
+    return self.__code 
 
-    def set_password(self, code, password):
-      if self.__code == code and not self.__password:
-          self.__password
-          return True, '*'*len(self.__password)
-      else: 
-          return False, ''
-    
-    def _check_password(self, password):
-          return self.__password == password
+  def set_password(self, code, password):
+    if self.__code == code and not self.__password:
+      self.__password = password
+      return True, '*'*len(self.__password)
+    else: 
+      return False, ''
+  
+  def _check_password(self, password):
+    return self.__password == password
 
-    def set_balance(self, new_balance, password):
-        if self._check_password(password):
-            self.__balance = new_balance
-            return True
-        else:
-            return False
+  def set_balance(self, new_balance, password):
+    if self._check_password(password):
+      self.__balance = new_balance
+      return True
+    else:
+      return False
 
 account = BankAccount(balance=1000)
 code = account.get_code()
@@ -222,19 +229,21 @@ class Persona {
 
 ```python
 class Persona:
-    def __init__(self, nombre):
-        self.__nombre = nombre
-        self.__edad = None
-    # Setter
-    def set_edad(self, edad):
-        if edad >= 0 and edad <= 120:
-            self.__edad = edad
-            return True
-        else:
-            False
-    ## Getter
-    def get_edad(self):
-        return self.__edad
+  def __init__(self, nombre):
+    self.__nombre = nombre
+    self.__edad = None
+
+  # Setter
+  def set_edad(self, edad):
+    if edad >= 0 and edad <= 120:
+      self.__edad = edad
+      return True
+    else:
+        False
+
+  ## Getter
+  def get_edad(self):
+    return self.__edad
 
 persona = Persona("Juan")
 persona.set_edad(30)
@@ -262,19 +271,19 @@ class Usuario {
 
 ```python
 class Usuario:
-    def __init__(self, nombre):
-        self.__nombre = nombre
-        self.__contrasena = None
+  def __init__(self, nombre):
+    self.__nombre = nombre
+    self.__contrasena = None
 
-    def set_contrasena(self, contrasena):
-        if len(contrasena) >= 8:
-            self.__contrasena = contrasena
-            True
-        else:
-            False
+  def set_contrasena(self, contrasena):
+    if len(contrasena) >= 8:
+      self.__contrasena = contrasena
+      True
+    else:
+      False
 
-    def get_contrasena(self):
-        return "********"
+  def get_contrasena(self):
+    return "********"
 
 usuario = Usuario("Ana")
 usuario.set_contrasena("Contrasena123")
@@ -309,19 +318,29 @@ classDiagram
 
 ```python
 class Vehicle:
-    def __init__(self, make):
-        self._make = make  # Protegido
+  def __init__(self, make):
+    self._make = make  # Protegido
 
 class ElectricVehicle(Vehicle):
-    def __init__(self, make, battery_range):
-        super().__init__(make)
-        self.battery_range = battery_range  # Público
+  def __init__(self, make, battery_range):
+    super().__init__(make)
+    self.battery_range = battery_range  # Público
 
-    def get_make(self):  # Getter para atributo protegido de la superclase
-        return self._make
+  def get_make(self):  # Getter para atributo protegido de la superclase
+    return self._make
 
-    def get_battery_range(self):  # Getter para atributo propio
-        return self.battery_range
+  def get_battery_range(self):  # Getter para atributo propio
+    return self.battery_range
 ```
+
+---- 
+
+### Info adicional
+
+- [Encapsulation in Python: Object-Oriented Programming](https://annaazzam.medium.com/encapsulation-in-python-object-oriented-programming-7cb8869e53a)
+- [Understanding Encapsulation in Object-Oriented Programming with Python](https://medium.com/data-bistrot/understanding-encapsulation-in-object-oriented-programming-with-python-b7a65c994902)
+- [Encapsulation in Python (aunque tiene muchos ads)](https://pynative.com/python-encapsulation/)
+- [How to do encapsulation in Python?](https://stackoverflow.com/questions/26216563/how-to-do-encapsulation-in-python)
+- [Encapsulation in Python [Part-1]- Excelente serie de articulos sobre encapsulamiento](https://cognitivecreator.medium.com/encapsulation-in-python-part-1-545401b4a3e7)
 
 
